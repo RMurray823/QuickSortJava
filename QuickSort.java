@@ -1,42 +1,51 @@
 package quicksort;
 
+import java.util.Scanner;
+
 /*****************
  author Robert Murray
  *****************/
 public class QuickSort
 {        
    public static void exchange(int[] anArray, int i, int j){
-       System.out.println("\n"+"Swap '" + anArray[i] + "' at slot '" + (i+1) +"' " +
-       "with '" + anArray[j] + "' at slot '" + (j+1) +"'");
+       //display left and right values being swapped as well as their respective position
+       System.out.print("\n"+"Swaped '" + anArray[i] + "' at slot '" + (i+1) +"' " +
+       "with '" + anArray[j] + "' at slot '" + (j+1) +"'"); 
 
-        int temp = anArray[i];
+        int temp = anArray[i]; 
 	anArray[i] = anArray[j];
 	anArray[j] = temp;}
    
    private static void printArray(int[] anArray){
       System.out.print("\n");
-      for (int count = 0; count < anArray.length; count++){
+      //count is +1 so that newline counter lines up nicely
+      for (int count = 1; count < anArray.length+1; count++){
          if (count > 0){ 
-         System.out.print(anArray[count] + ", ");
+         //makes a string for more nicely organized print out
+         String out = String.format("% 3d", anArray[count-1]);
+         System.out.print(out + " ");
          }
          
          if (count%10 == 0)
              System.out.print("\n");
       }
+      System.out.print("\n");
+
    }
    
-   private static void populateArray(int[] anArray){
+   private static void populateArray(int[] anArray, int range){
+       //iterate through empty array
        for (int count = 0; count < anArray.length; count++)
        {
-           anArray[count] = (int)(Math.random() * 100); 
            //insert random integer from 0 through 10 into array
+           anArray[count] = (int)(Math.random() * range); 
        }      
     }
    
    private static int partitionArray(int anArray[], int left_pointer, int right_pointer){
        
         int pivot = anArray[(left_pointer + right_pointer) / 2]; //set pivot
-		System.out.println("\n" + "Pivot is: " + pivot);
+		//System.out.print("\n" + "Pivot is: " + pivot);
 	while (left_pointer <= right_pointer) { //keep going until we traverse array
 			// Find element on left that should be on right
 		while (anArray[left_pointer] < pivot) { 
@@ -50,10 +59,12 @@ public class QuickSort
 			
 			// Swap elements, update left and right pointers
 		if (left_pointer <= right_pointer) {
+                        System.out.print("\n" + "Pivot is: " + pivot);
 			exchange(anArray, left_pointer, right_pointer);
 			left_pointer++;
 			right_pointer--;
-                        printArray(anArray);}
+                        //printArray(anArray);
+                }
                 
                 
                 }return left_pointer;}
@@ -68,20 +79,32 @@ public class QuickSort
 		}
 		if (index < right_pointer) { // Sort right half
 			Sort(anArray, index, right_pointer);
+    } 
 }
-       
-       //int pivot = anArray[(left_pointer + right_pointer)/2];  //sets pivot to middle of array                         
-       //System.out.printf("\n" + "Pivot is: " + pivot + "\n"); 
-       
-   }
          
    public static void main(String[] args) 
    {
-      int[] testArray = new int[100];
+       System.out.print("Quicksort program, sorts an array of integers\n");
+       //Get user input
+       Scanner input = new Scanner (System.in);
+       System.out.print("Enter size of array (1-20): ");
+       int newput = input.nextInt();
+       
+      int[] testArray = new int[newput];
+      //display empty initialized array
+      System.out.print("Initialize array");
       printArray(testArray);
-      populateArray(testArray);
+      //fill it up
+      System.out.print("\nPopulate array\n");
+      System.out.print("Enter range of numbers in array (1-100): ");
+      int anotherput = input.nextInt();
+      populateArray(testArray, anotherput);
+      //display new disorganized array
       printArray(testArray);
-      Sort(testArray, 0, testArray.length - 1);   
+      //sort it
+      Sort(testArray, 0, testArray.length - 1); 
+      //display array
+      System.out.print("\nSorted array");
       printArray(testArray);
    }
 }
