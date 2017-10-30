@@ -8,25 +8,25 @@ import java.util.Scanner;
  *****************/
 public class Print_N_Digits {
 
-    private int N;
+    private int N; //input for digit print
     
-    private int count;
+    private int count; //just a counter that helps keep output neat
     
-    private int K;
+    private int K; //input for binary print
        
-    private double getN(){
+    private double getN(){ //N getter
         return N;
     }
         
-    private int getK(){
+    private int getK(){ //K getter
         return K;
     }
         
-    private void setN(int input){
+    private void setN(int input){ //N setter
         this.N = input;
     }
     
-    private void setK(int input){
+    private void setK(int input){ //K setter
         this.K = input;
     }
     
@@ -37,7 +37,7 @@ public class Print_N_Digits {
         System.out.print("Print all n digit strictly increasing numbers\n" +
 "Given number of digits N in a number, print all N digit numbers whose digits are strictly increasing from left to right\n" +
 "N = "+ N +"\nResults:\n\n");
-        int counter = 0; //print line counter
+        int counter = 0; //counts each time a number is printed
         for (int i = 0; i < (int)Math.pow(10, N); i++){ //iterate through all integers based on 10^N
             String out = String.format("%0"+ N + "d", i); //make a string formatted to the proper numbers of digits
             System.out.print(out + " ");      //print
@@ -47,8 +47,8 @@ public class Print_N_Digits {
     }
     
     private void print_binary(int input){
-        setK(input);
-        int counter = 0;
+        setK(input); //set K digits
+        int counter = 0; //
         for (int i = 0; i <= (int)Math.pow(2, K) - 1; i++){
             counter++;
             String out = String.format("%" + K + "s", Integer.toBinaryString(i)).replace(" ", "0"); //make string with correct format
